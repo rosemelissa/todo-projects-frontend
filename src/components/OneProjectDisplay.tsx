@@ -8,7 +8,7 @@ interface OneProjectDisplayProps {
 function OneProjectDisplay({selectedProject}: OneProjectDisplayProps): JSX.Element {
     //GET that project name by id
     //GET that projects todo list ids by projectid
-    const [todoIds, setTodoIds] = useState<number[]>([])
+    const [todoIds, setTodoIds] = useState<number[]>([1, 2, 3]);
 
     return (
         <div className="one-project-display">
