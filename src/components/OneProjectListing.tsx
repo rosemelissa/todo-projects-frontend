@@ -5,9 +5,14 @@ interface OneProjectListingProps {
     project: IProject;
     projects: IProject[];
     setProjects: React.Dispatch<React.SetStateAction<IProject[]>>;
+    setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
 }
 
-function OneProjectListing({project, projects, setProjects}: OneProjectListingProps): JSX.Element {
+function OneProjectListing({project, projects, setProjects, setSelectedProject}: OneProjectListingProps): JSX.Element {
+const handleSelect = () => {
+    setSelectedProject(project);
+}
+
 const handleDelete = async () => {
     try {
         await axios.delete(`https://rosemelissa-todo-projects.herokuapp.com/project/${project.id}`)
@@ -19,7 +24,7 @@ const handleDelete = async () => {
 
     return(
         <div className="one-project-listing">
-            <p>{project.name}</p>
+            <button type="button" onClick={handleSelect}>{project.name}</button>
             <button type="button">Edit</button>
             <button type="button" onClick={handleDelete}>Delete</button>
         </div>

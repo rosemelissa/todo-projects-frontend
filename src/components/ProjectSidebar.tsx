@@ -5,8 +5,8 @@ import OneProjectListing from "./OneProjectListing";
 import axios from 'axios';
 
 interface ProjectSidebarProps {
-    selectedProject: number|null;
-    setSelectedProject: React.Dispatch<React.SetStateAction<number | null>>
+    selectedProject: IProject|null;
+    setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
 }
 
 function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarProps): JSX.Element {
@@ -27,7 +27,7 @@ function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarPr
         <div className="projects-sidebar">
             <p>projects</p>
             {console.log(projects)}
-            {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects}/>): <p>Loading...</p>}
+            {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects} setSelectedProject={setSelectedProject}/>): <p>Loading...</p>}
         </div>
     );
 }
