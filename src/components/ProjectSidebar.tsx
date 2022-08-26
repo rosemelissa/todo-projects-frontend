@@ -16,6 +16,8 @@ const baseUrl = process.env.NODE_ENV === "production"
 
 function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarProps): JSX.Element {
     const [projects, setProjects] = useState<IProject[]>([])
+    const [refreshProjectsList, setRefreshProjectsList] = useState<boolean>(true);
+
     useEffect(() => {
         const fetchProjects = async () => {
             try {
@@ -26,13 +28,13 @@ function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarPr
             }
         }
         fetchProjects();
-    }, [])
+    }, [refreshProjectsList])
 
     return(
         <div className="projects-sidebar">
             <p>projects</p>
-            {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects} selectedProject={selectedProject} setSelectedProject={setSelectedProject}/>): <p>Loading...</p>}
-            <CreateNewProject />
+            {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects} selectedProject={selectedProject} setSelectedProject={setSelectedProject} refreshProjectsList={refreshProjectsList} setRefreshProjectsList={setRefreshProjectsList}/>): <p>Loading...</p>}
+            <CreateNewProject refreshProjectsList={refreshProjectsList} setRefreshProjectsList={setRefreshProjectsList}/>
         </div>
     );
 }

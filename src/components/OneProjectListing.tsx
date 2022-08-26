@@ -8,13 +8,15 @@ interface OneProjectListingProps {
     setProjects: React.Dispatch<React.SetStateAction<IProject[]>>;
     selectedProject: IProject|null;
     setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
+    refreshProjectsList: boolean;
+    setRefreshProjectsList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const baseUrl = process.env.NODE_ENV === "production"
 	? "https://rosemelissa-todo-projects.herokuapp.com"
 	: "http://localhost:4000"
 
-function OneProjectListing({project, projects, setProjects, selectedProject, setSelectedProject}: OneProjectListingProps): JSX.Element {
+function OneProjectListing({project, projects, setProjects, selectedProject, setSelectedProject, refreshProjectsList, setRefreshProjectsList}: OneProjectListingProps): JSX.Element {
     const [mode, setMode] = useState<'display'|'edit'>('display');
     const [thisProjectName, setThisProjectName] = useState<string>(project.name);
 
@@ -28,8 +30,9 @@ function OneProjectListing({project, projects, setProjects, selectedProject, set
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`${baseUrl}/project/${project.id}`)
-            setProjects([...projects.filter(item => item.id !== project.id)])
+            await axios.delete(`${baseUrl}/project/${project.id}`);
+            setRefreshProjectsList(!refreshProjectsList);
+            //setProjects([...projects.filter(item => item.id !== project.id)])
         } catch (error) {
             console.error(error);
         }
@@ -38,7 +41,7 @@ function OneProjectListing({project, projects, setProjects, selectedProject, set
     const handleSaveEdit = async () => {
         try {
             await axios.patch(`${baseUrl}/project/${project.id}`, {name: thisProjectName})
-            window.location = window.location;
+            setRefreshProjectsList(!refreshProjectsList);
         } catch (error) {
             console.error(error);
         }

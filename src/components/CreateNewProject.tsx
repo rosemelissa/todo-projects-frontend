@@ -1,11 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 
+interface CreateNewProjectProps {
+    refreshProjectsList: boolean;
+    setRefreshProjectsList: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const baseUrl = process.env.NODE_ENV === "production"
 	? "https://rosemelissa-todo-projects.herokuapp.com"
 	: "http://localhost:4000"
 
-function CreateNewProject(): JSX.Element {
+function CreateNewProject({refreshProjectsList, setRefreshProjectsList}: CreateNewProjectProps): JSX.Element {
     const [mode, setMode] = useState<"button"|"input">('button');
     const [newProjectName, setNewProjectName] = useState<string>('');
 
@@ -13,7 +18,7 @@ function CreateNewProject(): JSX.Element {
         await axios.post(`${baseUrl}/project`, {name: newProjectName});
         setNewProjectName('')
         setMode('button');
-        window.location = window.location;
+        setRefreshProjectsList(!refreshProjectsList);
     }
 
     const handleCancel = () => {

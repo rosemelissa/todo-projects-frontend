@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import IProject from "../Interfaces/IProject";
 import ITodo from "../Interfaces/ITodo";
+import CreateNewTodo from "./CreateNewTodo";
 import OneTodoDisplay from "./OneTodoDisplay";
 
 interface OneProjectDisplayProps {
@@ -37,6 +38,7 @@ function OneProjectDisplay({selectedProject}: OneProjectDisplayProps): JSX.Eleme
         return (
                 <div className="one-project-display">
                     <h1>{selectedProject.name}</h1>
+                    <CreateNewTodo selectedProject={selectedProject}/>
                     {todos.map(todo => <OneTodoDisplay key={todo.id} todo={todo}/>)}
                 </div>
             )
