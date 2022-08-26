@@ -6,7 +6,7 @@ const baseUrl = process.env.NODE_ENV === "production"
 	: "http://localhost:4000"
 
 function CreateNewProject(): JSX.Element {
-    const [mode, setMode] = useState<string>('button');
+    const [mode, setMode] = useState<"button"|"input">('button');
     const [newProjectName, setNewProjectName] = useState<string>('');
 
     const handleCreateNewProject = async() => {
