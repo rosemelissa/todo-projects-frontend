@@ -5,6 +5,7 @@ interface OneProjectListingProps {
     project: IProject;
     projects: IProject[];
     setProjects: React.Dispatch<React.SetStateAction<IProject[]>>;
+    selectedProject: IProject|null;
     setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
 }
 
@@ -12,9 +13,13 @@ const baseUrl = process.env.NODE_ENV === "production"
 	? "https://rosemelissa-todo-projects.herokuapp.com"
 	: "http://localhost:4000"
 
-function OneProjectListing({project, projects, setProjects, setSelectedProject}: OneProjectListingProps): JSX.Element {
+function OneProjectListing({project, projects, setProjects, selectedProject, setSelectedProject}: OneProjectListingProps): JSX.Element {
 const handleSelect = () => {
-    setSelectedProject(project);
+    if ((selectedProject) && (selectedProject.id === project.id)) {
+        setSelectedProject(null);
+    } else {
+        setSelectedProject(project);
+    }
 }
 
 const handleDelete = async () => {

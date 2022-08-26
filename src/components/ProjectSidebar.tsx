@@ -31,7 +31,7 @@ function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarPr
     return(
         <div className="projects-sidebar">
             <p>projects</p>
-            {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects} setSelectedProject={setSelectedProject}/>): <p>Loading...</p>}
+            {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects} selectedProject={selectedProject} setSelectedProject={setSelectedProject}/>): <p>Loading...</p>}
             <CreateNewProject />
         </div>
     );
