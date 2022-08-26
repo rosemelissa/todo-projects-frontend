@@ -1,23 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
-import IProject from "../Interfaces/IProject";
-
-interface CreateNewProjectProps {
-    setProjects: React.Dispatch<React.SetStateAction<IProject[]>>;
-}
 
 const baseUrl = process.env.NODE_ENV === "production"
 	? "https://rosemelissa-todo-projects.herokuapp.com"
 	: "http://localhost:4000"
 
-function CreateNewProject({setProjects}: CreateNewProjectProps): JSX.Element {
+function CreateNewProject(): JSX.Element {
     const [mode, setMode] = useState<string>('button');
     const [newProjectName, setNewProjectName] = useState<string>('');
 
     const handleCreateNewProject = async() => {
         await axios.post(`${baseUrl}/project`, {name: newProjectName});
         setNewProjectName('')
-        setMode('button')
+        setMode('button');
+        window.location = window.location;
     }
 
     const handleCancel = () => {
