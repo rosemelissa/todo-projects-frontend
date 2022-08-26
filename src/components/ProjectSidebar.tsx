@@ -3,6 +3,7 @@ import IProject from "../Interfaces/IProject";
 import OneProjectListing from "./OneProjectListing";
 
 import axios from 'axios';
+import CreateNewProject from "./CreateNewProject";
 
 interface ProjectSidebarProps {
     selectedProject: IProject|null;
@@ -31,6 +32,7 @@ function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarPr
         <div className="projects-sidebar">
             <p>projects</p>
             {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects} setSelectedProject={setSelectedProject}/>): <p>Loading...</p>}
+            <CreateNewProject setProjects={setProjects}/>
         </div>
     );
 }
