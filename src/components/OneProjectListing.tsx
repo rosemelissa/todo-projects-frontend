@@ -8,6 +8,10 @@ interface OneProjectListingProps {
     setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
 }
 
+const baseUrl = process.env.NODE_ENV === "production"
+	? "https://rosemelissa-todo-projects.herokuapp.com"
+	: "http://localhost:4000"
+
 function OneProjectListing({project, projects, setProjects, setSelectedProject}: OneProjectListingProps): JSX.Element {
 const handleSelect = () => {
     setSelectedProject(project);
@@ -15,7 +19,7 @@ const handleSelect = () => {
 
 const handleDelete = async () => {
     try {
-        await axios.delete(`https://rosemelissa-todo-projects.herokuapp.com/project/${project.id}`)
+        await axios.delete(`${baseUrl}/project/${project.id}`)
         setProjects([...projects.filter(item => item.id !== project.id)])
     } catch (error) {
         console.error(error);

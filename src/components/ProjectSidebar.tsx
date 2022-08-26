@@ -9,12 +9,16 @@ interface ProjectSidebarProps {
     setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
 }
 
+const baseUrl = process.env.NODE_ENV === "production"
+	? "https://rosemelissa-todo-projects.herokuapp.com"
+	: "http://localhost:4000"
+
 function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarProps): JSX.Element {
     const [projects, setProjects] = useState<IProject[]>([])
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const projectArray: IProject[] = (await axios.get("https://rosemelissa-todo-projects.herokuapp.com/projects")).data;
+                const projectArray: IProject[] = (await axios.get(`${baseUrl}/projects`)).data;
                 setProjects(projectArray);
             } catch (error) {
                 console.error(error);
@@ -26,7 +30,6 @@ function ProjectsSidebar({selectedProject, setSelectedProject}: ProjectSidebarPr
     return(
         <div className="projects-sidebar">
             <p>projects</p>
-            {console.log(projects)}
             {projects ? projects.map(project => <OneProjectListing key={project.id} project={project} projects={projects} setProjects={setProjects} setSelectedProject={setSelectedProject}/>): <p>Loading...</p>}
         </div>
     );

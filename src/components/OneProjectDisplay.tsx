@@ -1,20 +1,43 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import IProject from "../Interfaces/IProject";
+import ITodo from "../Interfaces/ITodo";
 import OneTodoDisplay from "./OneTodoDisplay";
 
 interface OneProjectDisplayProps {
     selectedProject: IProject|null;
 }
 
+const baseUrl = process.env.NODE_ENV === "production"
+	? "https://rosemelissa-todo-projects.herokuapp.com"
+	: "http://localhost:4000"
+
 function OneProjectDisplay({selectedProject}: OneProjectDisplayProps): JSX.Element {
     //GET that project name by id
     //GET that projects todo list ids by projectid
-    const [todoIds, setTodoIds] = useState<number[]>([1, 2, 3]);
+    const [todos, setTodos] = useState<ITodo[]>([]);
+
+    useEffect(() => {
+        const fetchTodos = async () => {
+            if (selectedProject) {
+                try {
+                    const todosArray: ITodo[] = (await axios.get(`${baseUrl}/project/${selectedProject.id}/todos`)).data;
+                    setTodos(todosArray);
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                setTodos([]);
+            }
+        };
+        fetchTodos();
+    }, [selectedProject])
+
     if (selectedProject) {
         return (
                 <div className="one-project-display">
                     <h1>{selectedProject.name}</h1>
-                    {todoIds.map(todoId => <OneTodoDisplay key={todoId} todoId={todoId}/>)}
+                    {todos.map(todo => <OneTodoDisplay key={todo.id} todo={todo}/>)}
                 </div>
             )
     } else {
