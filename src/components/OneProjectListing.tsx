@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import IProject from "../Interfaces/IProject";
 
 interface OneProjectListingProps {
@@ -14,28 +15,48 @@ const baseUrl = process.env.NODE_ENV === "production"
 	: "http://localhost:4000"
 
 function OneProjectListing({project, projects, setProjects, selectedProject, setSelectedProject}: OneProjectListingProps): JSX.Element {
-const handleSelect = () => {
-    if ((selectedProject) && (selectedProject.id === project.id)) {
-        setSelectedProject(null);
-    } else {
-        setSelectedProject(project);
-    }
-}
+    const [mode, setMode] = useState<'display'|'edit'>('display');
+    const [thisProjectName, setThisProjectName] = useState<string>(project.name);
 
-const handleDelete = async () => {
-    try {
-        await axios.delete(`${baseUrl}/project/${project.id}`)
-        setProjects([...projects.filter(item => item.id !== project.id)])
-    } catch (error) {
-        console.error(error);
+    const handleSelect = () => {
+        if ((selectedProject) && (selectedProject.id === project.id)) {
+            setSelectedProject(null);
+        } else {
+            setSelectedProject(project);
+        }
     }
-}
+
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`${baseUrl}/project/${project.id}`)
+            setProjects([...projects.filter(item => item.id !== project.id)])
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleSaveEdit = async () => {
+        try {
+            await axios.patch(`${baseUrl}/project/${project.id}`, {name: thisProjectName})
+            window.location = window.location;
+        } catch (error) {
+            console.error(error);
+        }
+        setMode("display");
+    }
 
     return(
         <div className="one-project-listing">
-            <button type="button" onClick={handleSelect}>{project.name}</button>
-            <button type="button">Edit</button>
-            <button type="button" onClick={handleDelete}>Delete</button>
+            {mode === 'display' && <>
+                <button type="button" onClick={handleSelect}>{project.name}</button>
+                <button type="button" onClick={() => setMode("edit")}>Edit</button>
+                <button type="button" onClick={handleDelete}>Delete</button>
+            </>}
+            {mode === 'edit' && <>
+                <input type="text" value={thisProjectName} onChange={(e) => setThisProjectName(e.target.value)}/>
+                <button type="button" onClick={handleSaveEdit}>Save</button>
+                <button type="button" onClick={() => {setMode("display"); setThisProjectName(project.name)}}>Cancel</button>
+            </>}
         </div>
     )
 }
