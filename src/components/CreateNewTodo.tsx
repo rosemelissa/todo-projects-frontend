@@ -5,13 +5,15 @@ import ITodoInput from "../Interfaces/ITodoInput";
 
 interface CreateNewTodoProps {
     selectedProject: IProject|null;
+    refreshTodosList: boolean;
+    setRefreshTodosList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const baseUrl = process.env.NODE_ENV === "production"
 	? "https://rosemelissa-todo-projects.herokuapp.com"
 	: "http://localhost:4000";
 
-function CreateNewTodo({selectedProject}: CreateNewTodoProps): JSX.Element {
+function CreateNewTodo({selectedProject, refreshTodosList, setRefreshTodosList}: CreateNewTodoProps): JSX.Element {
     const [mode, setMode] = useState<"button"|"input">("button");
     const [newTodo, setNewTodo] = useState<ITodoInput>({title: '', description: '', dueDate: ''})
 
@@ -20,7 +22,7 @@ function CreateNewTodo({selectedProject}: CreateNewTodoProps): JSX.Element {
             await axios.post(`${baseUrl}/project/${selectedProject.id}/todos`, newTodo)
             setMode("button");
             setNewTodo({title: '', description: '', dueDate: ''})
-            window.location = window.location;
+            setRefreshTodosList(!refreshTodosList);
         }
     }
 

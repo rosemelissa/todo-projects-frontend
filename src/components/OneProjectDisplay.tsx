@@ -17,6 +17,7 @@ function OneProjectDisplay({selectedProject}: OneProjectDisplayProps): JSX.Eleme
     //GET that project name by id
     //GET that projects todo list ids by projectid
     const [todos, setTodos] = useState<ITodo[]>([]);
+    const [refreshTodosList, setRefreshTodosList] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchTodos = async () => {
@@ -32,14 +33,14 @@ function OneProjectDisplay({selectedProject}: OneProjectDisplayProps): JSX.Eleme
             }
         };
         fetchTodos();
-    }, [selectedProject])
+    }, [selectedProject, refreshTodosList])
 
     if (selectedProject) {
         return (
                 <div className="one-project-display">
                     <h1>{selectedProject.name}</h1>
-                    <CreateNewTodo selectedProject={selectedProject}/>
-                    {todos.map(todo => <OneTodoDisplay key={todo.id} todo={todo}/>)}
+                    <CreateNewTodo selectedProject={selectedProject} refreshTodosList={refreshTodosList} setRefreshTodosList={setRefreshTodosList}/>
+                    {todos.map(todo => <OneTodoDisplay key={todo.id} todo={todo} refreshTodosList={refreshTodosList} setRefreshTodosList={setRefreshTodosList}/>)}
                 </div>
             )
     } else {
