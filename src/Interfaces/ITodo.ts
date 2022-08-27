@@ -1,9 +1,9 @@
 export default interface ITodo {
     id: number;
-    projectId: number;
+    projectid: number;
     title: string;
     description: string;
-    createdDate: string;
-    updatedDate: string;
-    dueDate: string;
+    createddate: string;
+    updateddate: string;
+    duedate: string;
 }

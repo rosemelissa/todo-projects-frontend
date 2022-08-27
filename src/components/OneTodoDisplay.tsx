@@ -16,12 +16,12 @@ function OneTodoDisplay({todo, refreshTodosList, setRefreshTodosList}: OneTodoDi
     const [mode, setMode] = useState<"display"|"edit">("display");
     const handleDelete = async () => {
         try {
-            await axios.delete(`${baseUrl}/project/${todo.projectId}/todo/${todo.id}`);
+            console.log(todo)
+            await axios.delete(`${baseUrl}/project/${todo.projectid}/todo/${todo.id}`);
             setRefreshTodosList(!refreshTodosList);
         } catch (error) {
             console.error(error);
         }
-
     }
     //GET todo from database
     return(
@@ -29,7 +29,7 @@ function OneTodoDisplay({todo, refreshTodosList, setRefreshTodosList}: OneTodoDi
             {mode === "display" && <>
                 <h2>{todo.title}</h2>
                 <p>{todo.description}</p>
-                <p>{todo.dueDate}</p>
+                <p>{todo.duedate}</p>
                 <button type="button" onClick={() => setMode("edit")}>Edit</button>
                 <button type="button" onClick={handleDelete}>Delete</button>
             </>}
