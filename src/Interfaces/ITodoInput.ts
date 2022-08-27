@@ -1,5 +1,5 @@
 export default interface ITodo {
-    title: string;
-    description: string;
-    duedate: string;
+  title: string;
+  description: string;
+  duedate: string;
 }
