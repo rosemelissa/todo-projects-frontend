@@ -15,20 +15,20 @@ const baseUrl = process.env.NODE_ENV === "production"
 
 function CreateNewTodo({selectedProject, refreshTodosList, setRefreshTodosList}: CreateNewTodoProps): JSX.Element {
     const [mode, setMode] = useState<"button"|"input">("button");
-    const [newTodo, setNewTodo] = useState<ITodoInput>({title: '', description: '', dueDate: ''})
+    const [newTodo, setNewTodo] = useState<ITodoInput>({title: '', description: '', duedate: ''})
 
     const handleNewTodo = async () => {
         if (selectedProject) {
             await axios.post(`${baseUrl}/project/${selectedProject.id}/todos`, newTodo)
             setMode("button");
-            setNewTodo({title: '', description: '', dueDate: ''})
+            setNewTodo({title: '', description: '', duedate: ''})
             setRefreshTodosList(!refreshTodosList);
         }
     }
 
     const handleCancel = () => {
         setMode("button");
-        setNewTodo({title: '', description: '', dueDate: ''})
+        setNewTodo({title: '', description: '', duedate: ''})
     }
 
     return(
@@ -42,7 +42,7 @@ function CreateNewTodo({selectedProject, refreshTodosList, setRefreshTodosList}:
                 <label htmlFor="descrption">Description</label>
                 <input type="text" id="description" value={newTodo.description} onChange={(e) => {setNewTodo({...newTodo, description: e.target.value})}}/>
                 <label htmlFor="due-date">Due date</label>
-                <input type="datetime-local" id="due-date" value={newTodo.dueDate} onChange={(e) => {setNewTodo({...newTodo, dueDate: e.target.value})}}/>
+                <input type="datetime-local" id="due-date" value={newTodo.duedate} onChange={(e) => {setNewTodo({...newTodo, duedate: e.target.value})}}/>
                 <button type="button" onClick={handleNewTodo}>Create</button>
                 <button type="button" onClick={handleCancel}>Cancel</button>
             </form>}
