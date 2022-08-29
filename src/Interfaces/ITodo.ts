@@ -6,4 +6,5 @@ export default interface ITodo {
   createddate: string;
   updateddate: string;
   duedate: string;
+  complete: boolean;
 }

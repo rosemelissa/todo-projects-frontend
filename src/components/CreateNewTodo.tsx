@@ -28,7 +28,6 @@ function CreateNewTodo({
 
   const handleNewTodo = async () => {
     if (selectedProject) {
-      console.log(newTodo)
       await axios.post(
         `${baseUrl}/project/${selectedProject.id}/todos`,
         newTodo
@@ -80,7 +79,6 @@ function CreateNewTodo({
             value={newTodo.duedate}
             onChange={(e) => {
               setNewTodo({ ...newTodo, duedate: e.target.value });
-              console.log(e.target.value, 'line83')
             }}
           />
           <button type="button" onClick={handleNewTodo}>

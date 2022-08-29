@@ -23,9 +23,26 @@ function OneTodoDisplay({
   const [mode, setMode] = useState<"display" | "edit">("display");
   const [editedTodo, setEditedTodo] = useState<ITodoInput>({ title: todo.title, description: todo.description, duedate: todo.duedate })
 
+  const handleMakeIncomplete = async () => {
+    try {
+      await axios.patch(`${baseUrl}/project/${todo.projectid}/todo/${todo.id}/completion`, {complete: false});
+      setRefreshTodosList(!refreshTodosList);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleMakeComplete = async () => {
+    try {
+      await axios.patch(`${baseUrl}/project/${todo.projectid}/todo/${todo.id}/completion`, {complete: true});
+      setRefreshTodosList(!refreshTodosList);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const handleDelete = async () => {
     try {
-      console.log(todo);
       await axios.delete(
         `${baseUrl}/project/${todo.projectid}/todo/${todo.id}`
       );
@@ -59,13 +76,17 @@ function OneTodoDisplay({
           <h2>{todo.title}</h2>
           <p>{todo.description}</p>
           <p>{formatDate(todo.duedate)}</p>
-          {console.log(todo.duedate, todo.title)}
           <button type="button" onClick={() => setMode("edit")}>
             Edit
           </button>
           <button type="button" onClick={handleDelete}>
             Delete
           </button>
+          {todo.complete ? (
+          <input type="checkbox" defaultChecked onClick={handleMakeIncomplete} />
+        ) : (
+          <input type="checkbox" onClick={handleMakeComplete} />
+        )}
         </>
       )}
       {mode === "edit" && <>
