@@ -28,6 +28,7 @@ function CreateNewTodo({
 
   const handleNewTodo = async () => {
     if (selectedProject) {
+      console.log(newTodo)
       await axios.post(
         `${baseUrl}/project/${selectedProject.id}/todos`,
         newTodo
@@ -74,11 +75,12 @@ function CreateNewTodo({
           />
           <label htmlFor="due-date">Due date</label>
           <input
-            type="datetime-local"
+            type="date"
             id="due-date"
             value={newTodo.duedate}
             onChange={(e) => {
               setNewTodo({ ...newTodo, duedate: e.target.value });
+              console.log(e.target.value, 'line83')
             }}
           />
           <button type="button" onClick={handleNewTodo}>
