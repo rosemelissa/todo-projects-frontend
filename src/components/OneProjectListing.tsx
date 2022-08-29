@@ -41,6 +41,7 @@ function OneProjectListing({
     try {
       await axios.delete(`${baseUrl}/project/${project.id}`);
       setRefreshProjectsList(!refreshProjectsList);
+      setSelectedProject(null);
       //setProjects([...projects.filter(item => item.id !== project.id)])
     } catch (error) {
       console.error(error);
