@@ -1,4 +1,4 @@
 export default interface IFilter {
-    method: string;
-    showOverdue: boolean;
+  method: string;
+  showOverdue: boolean;
 }

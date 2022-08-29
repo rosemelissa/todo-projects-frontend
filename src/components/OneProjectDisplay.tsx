@@ -6,7 +6,7 @@ import ITodo from "../Interfaces/ITodo";
 import CreateNewTodo from "./CreateNewTodo";
 import Filter from "./Filter";
 import OneTodoDisplay from "./OneTodoDisplay";
-import filterTodos from "../utils/filterTodos"
+import filterTodos from "../utils/filterTodos";
 
 interface OneProjectDisplayProps {
   selectedProject: IProject | null;
@@ -24,7 +24,10 @@ function OneProjectDisplay({
   //GET that projects todo list ids by projectid
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [refreshTodosList, setRefreshTodosList] = useState<boolean>(true);
-  const [filterMethod, setFilterMethod] = useState<IFilter>({method: "id", showOverdue: true})
+  const [filterMethod, setFilterMethod] = useState<IFilter>({
+    method: "id",
+    showOverdue: true,
+  });
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -33,7 +36,11 @@ function OneProjectDisplay({
           const todosArray: ITodo[] = (
             await axios.get(`${baseUrl}/project/${selectedProject.id}/todos`)
           ).data;
-          const filteredTodos: ITodo[] = filterTodos(todosArray, filterMethod.method, filterMethod.showOverdue);
+          const filteredTodos: ITodo[] = filterTodos(
+            todosArray,
+            filterMethod.method,
+            filterMethod.showOverdue
+          );
           setTodos(filteredTodos);
         } catch (error) {
           console.error(error);
@@ -49,7 +56,7 @@ function OneProjectDisplay({
     return (
       <div className="one-project-display">
         <h1 id="project-name">{selectedProject.name}</h1>
-        <Filter filterMethod={filterMethod} setFilterMethod={setFilterMethod}/>
+        <Filter filterMethod={filterMethod} setFilterMethod={setFilterMethod} />
         <CreateNewTodo
           selectedProject={selectedProject}
           refreshTodosList={refreshTodosList}

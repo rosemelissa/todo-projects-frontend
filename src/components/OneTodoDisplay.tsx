@@ -21,25 +21,35 @@ function OneTodoDisplay({
   setRefreshTodosList,
 }: OneTodoDisplayProps): JSX.Element {
   const [mode, setMode] = useState<"display" | "edit">("display");
-  const [editedTodo, setEditedTodo] = useState<ITodoInput>({ title: todo.title, description: todo.description, duedate: todo.duedate })
+  const [editedTodo, setEditedTodo] = useState<ITodoInput>({
+    title: todo.title,
+    description: todo.description,
+    duedate: todo.duedate,
+  });
 
   const handleMakeIncomplete = async () => {
     try {
-      await axios.patch(`${baseUrl}/project/${todo.projectid}/todo/${todo.id}/completion`, {complete: false});
+      await axios.patch(
+        `${baseUrl}/project/${todo.projectid}/todo/${todo.id}/completion`,
+        { complete: false }
+      );
       setRefreshTodosList(!refreshTodosList);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const handleMakeComplete = async () => {
     try {
-      await axios.patch(`${baseUrl}/project/${todo.projectid}/todo/${todo.id}/completion`, {complete: true});
+      await axios.patch(
+        `${baseUrl}/project/${todo.projectid}/todo/${todo.id}/completion`,
+        { complete: true }
+      );
       setRefreshTodosList(!refreshTodosList);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const handleDelete = async () => {
     try {
@@ -54,28 +64,40 @@ function OneTodoDisplay({
 
   const handleSaveEdit = async () => {
     try {
-      await axios.patch(`${baseUrl}/project/${todo.projectid}/todo/${todo.id}`, editedTodo);
+      await axios.patch(
+        `${baseUrl}/project/${todo.projectid}/todo/${todo.id}`,
+        editedTodo
+      );
       setRefreshTodosList(!refreshTodosList);
       setMode("display");
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const handleCancel = () => {
-    setEditedTodo({ title: todo.title, description: todo.description, duedate: todo.duedate });
+    setEditedTodo({
+      title: todo.title,
+      description: todo.description,
+      duedate: todo.duedate,
+    });
     setMode("display");
-  }
-
+  };
 
   //GET todo from database
   return (
     <div className="one-todo-display">
       {mode === "display" && (
         <>
-          {todo.complete && <h2 className="todo-title complete">{todo.title}</h2>}
-          {!todo.complete && (Date.parse(todo.duedate) > Date.now()) && <h2 className="todo-title incomplete underdue">{todo.title}</h2>}
-          {!todo.complete && (Date.parse(todo.duedate) < Date.now()) &&  <h2 className="todo-title incomplete overdue">{todo.title}</h2>}
+          {todo.complete && (
+            <h2 className="todo-title complete">{todo.title}</h2>
+          )}
+          {!todo.complete && Date.parse(todo.duedate) > Date.now() && (
+            <h2 className="todo-title incomplete underdue">{todo.title}</h2>
+          )}
+          {!todo.complete && Date.parse(todo.duedate) < Date.now() && (
+            <h2 className="todo-title incomplete overdue">{todo.title}</h2>
+          )}
           <p className="todo-description">{todo.description}</p>
           <p className="todo-duedate">{formatDate(todo.duedate)}</p>
           <button type="button" onClick={() => setMode("edit")}>
@@ -85,49 +107,55 @@ function OneTodoDisplay({
             Delete
           </button>
           {todo.complete ? (
-          <input type="checkbox" defaultChecked onClick={handleMakeIncomplete} />
-        ) : (
-          <input type="checkbox" onClick={handleMakeComplete} />
-        )}
+            <input
+              type="checkbox"
+              defaultChecked
+              onClick={handleMakeIncomplete}
+            />
+          ) : (
+            <input type="checkbox" onClick={handleMakeComplete} />
+          )}
         </>
       )}
-      {mode === "edit" && <>
-      <form>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            value={editedTodo.title}
-            onChange={(e) => {
-              setEditedTodo({ ...editedTodo, title: e.target.value });
-            }}
-          />
-          <label htmlFor="descrption">Description</label>
-          <input
-            type="text"
-            id="description"
-            value={editedTodo.description}
-            onChange={(e) => {
-              setEditedTodo({ ...editedTodo, description: e.target.value });
-            }}
-          />
-          <label htmlFor="due-date">Due date</label>
-          <input
-            type="date"
-            id="due-date"
-            value={editedTodo.duedate}
-            onChange={(e) => {
-              setEditedTodo({ ...editedTodo, duedate: e.target.value });
-            }}
-          />
-          <button type="button" onClick={handleSaveEdit}>
-            Save
-          </button>
-          <button type="button" onClick={handleCancel}>
-            Cancel
-          </button>
-        </form>
-      </>}
+      {mode === "edit" && (
+        <>
+          <form>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              value={editedTodo.title}
+              onChange={(e) => {
+                setEditedTodo({ ...editedTodo, title: e.target.value });
+              }}
+            />
+            <label htmlFor="descrption">Description</label>
+            <input
+              type="text"
+              id="description"
+              value={editedTodo.description}
+              onChange={(e) => {
+                setEditedTodo({ ...editedTodo, description: e.target.value });
+              }}
+            />
+            <label htmlFor="due-date">Due date</label>
+            <input
+              type="date"
+              id="due-date"
+              value={editedTodo.duedate}
+              onChange={(e) => {
+                setEditedTodo({ ...editedTodo, duedate: e.target.value });
+              }}
+            />
+            <button type="button" onClick={handleSaveEdit}>
+              Save
+            </button>
+            <button type="button" onClick={handleCancel}>
+              Cancel
+            </button>
+          </form>
+        </>
+      )}
     </div>
   );
 }
