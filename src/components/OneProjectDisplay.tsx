@@ -48,7 +48,7 @@ function OneProjectDisplay({
   if (selectedProject) {
     return (
       <div className="one-project-display">
-        <h1>{selectedProject.name}</h1>
+        <h1 id="project-name">{selectedProject.name}</h1>
         <Filter filterMethod={filterMethod} setFilterMethod={setFilterMethod}/>
         <CreateNewTodo
           selectedProject={selectedProject}

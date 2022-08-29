@@ -64,7 +64,7 @@ function OneProjectListing({
     <div className="one-project-listing">
       {mode === "display" && (
         <>
-          <button type="button" onClick={handleSelect}>
+          <button className="project-name" type="button" onClick={handleSelect}>
             {project.name}
           </button>
           <button type="button" onClick={() => setMode("edit")}>

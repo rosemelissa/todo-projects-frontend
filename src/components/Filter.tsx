@@ -8,7 +8,7 @@ interface FilterProps {
 function Filter({filterMethod, setFilterMethod}: FilterProps): JSX.Element {
 
     return (
-        <div>
+        <div id="filter">
             <label htmlFor="filter-method">Filter by:</label>
             <select
             id="filter-method"

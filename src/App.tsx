@@ -7,7 +7,7 @@ function App(): JSX.Element {
   const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
 
   return (
-    <>
+    <div id="app">
       <ProjectsSidebar
         selectedProject={selectedProject}
         setSelectedProject={setSelectedProject}
@@ -15,7 +15,7 @@ function App(): JSX.Element {
       {selectedProject && (
         <OneProjectDisplay selectedProject={selectedProject} />
       )}
-    </>
+    </div>
   );
 }
 

@@ -73,9 +73,11 @@ function OneTodoDisplay({
     <div className="one-todo-display">
       {mode === "display" && (
         <>
-          <h2>{todo.title}</h2>
-          <p>{todo.description}</p>
-          <p>{formatDate(todo.duedate)}</p>
+          {todo.complete && <h2 className="todo-title complete">{todo.title}</h2>}
+          {!todo.complete && (Date.parse(todo.duedate) > Date.now()) && <h2 className="todo-title incomplete underdue">{todo.title}</h2>}
+          {!todo.complete && (Date.parse(todo.duedate) < Date.now()) &&  <h2 className="todo-title incomplete overdue">{todo.title}</h2>}
+          <p className="todo-description">{todo.description}</p>
+          <p className="todo-duedate">{formatDate(todo.duedate)}</p>
           <button type="button" onClick={() => setMode("edit")}>
             Edit
           </button>

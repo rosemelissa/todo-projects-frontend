@@ -38,7 +38,7 @@ function ProjectsSidebar({
 
   return (
     <div className="projects-sidebar">
-      <p>projects</p>
+      <p>Projects</p>
       {projects ? (
         projects.map((project) => (
           <OneProjectListing

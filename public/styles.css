@@ -1,0 +1,94 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    margin: 0;
+}
+#app {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    background-color: #1E1E1E;
+}
+
+.projects-sidebar {
+    flex: 0 1 auto;
+    display: block;
+    width: 200px;
+    color: white;
+    background-color: #252526;
+    padding: 10px 5px 100% 5px;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+}
+
+.one-project-listing {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.project-name {
+    width: 114.5px;
+}
+
+#create-new-project input {
+    width: 192px;
+}
+
+.one-project-display {
+    flex: 1 1 0;
+
+
+    display: block;
+    color: white;
+}
+
+#project-name {
+    flex: 1 1 0;
+
+
+    color: white;
+    background-color: #2D2D2D;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+#filter {
+    flex: 1 1 0;
+
+
+    color: white;
+    background-color: #2D2D2D;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: auto;
+    
+    /* width: 80vw; */
+    padding: 20px 0px;
+    text-align: center;
+}
+
+button {
+    background-color: white;
+    color: black;
+    border: 0px solid white;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.todo-title.complete {
+    color: #73C991
+}
+
+.todo-title.incomplete.overdue {
+    color: #E3782D;
+}
+
+.todo-title.incomplete.underdue {
+    color: #CBCB40;
+}
+
