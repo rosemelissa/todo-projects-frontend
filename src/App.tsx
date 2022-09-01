@@ -12,9 +12,8 @@ function App(): JSX.Element {
         selectedProject={selectedProject}
         setSelectedProject={setSelectedProject}
       />
-      
-        <OneProjectDisplay selectedProject={selectedProject} />
-      
+
+      <OneProjectDisplay selectedProject={selectedProject} />
     </div>
   );
 }

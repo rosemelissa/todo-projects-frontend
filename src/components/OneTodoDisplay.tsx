@@ -100,21 +100,22 @@ function OneTodoDisplay({
           )}
           <p className="todo-description">{todo.description}</p>
           <p className="todo-duedate">Due: {formatDate(todo.duedate)}</p>
-          <p>Completed:{todo.complete ? (
-            <input
-              type="checkbox"
-              defaultChecked
-              onClick={handleMakeIncomplete}
-            />
-          ) : (
-            <input type="checkbox" onClick={handleMakeComplete} />
-          )}</p>
+          <p>
+            Completed:
+            {todo.complete ? (
+              <input
+                type="checkbox"
+                defaultChecked
+                onClick={handleMakeIncomplete}
+              />
+            ) : (
+              <input type="checkbox" onClick={handleMakeComplete} />
+            )}
+          </p>
           <p className="edit-and-delete">
             <span onClick={() => setMode("edit")}>📝</span>
             <span onClick={handleDelete}>🗑️</span>
           </p>
-          
-          
         </>
       )}
       {mode === "edit" && (

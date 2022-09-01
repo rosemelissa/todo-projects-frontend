@@ -68,10 +68,10 @@ function OneProjectListing({
             {project.name}
           </p>
           <p className="emoji" onClick={() => setMode("edit")}>
-          📝
+            📝
           </p>
           <p className="emoji" onClick={handleDelete}>
-          🗑️
+            🗑️
           </p>
         </>
       )}
@@ -83,9 +83,10 @@ function OneProjectListing({
             onChange={(e) => setThisProjectName(e.target.value)}
           />
           <p className="emoji" onClick={handleSaveEdit}>
-          💾
+            💾
           </p>
-          <p className="emoji"
+          <p
+            className="emoji"
             onClick={() => {
               setMode("display");
               setThisProjectName(project.name);
