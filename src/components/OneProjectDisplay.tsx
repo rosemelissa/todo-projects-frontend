@@ -74,13 +74,13 @@ function OneProjectDisplay({
     );
   } else {
     return (
-      <>
+      <div className="no-project-selected">
         <h1>No project selected!</h1>
         <p>
           Click on a project in the side-bar to view the todos, or click 'create
           new project'!
         </p>
-      </>
+      </div>
     );
   }
 }

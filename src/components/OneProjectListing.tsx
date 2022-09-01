@@ -64,15 +64,15 @@ function OneProjectListing({
     <div className="one-project-listing">
       {mode === "display" && (
         <>
-          <button className="project-name" type="button" onClick={handleSelect}>
+          <p className="project-name" onClick={handleSelect}>
             {project.name}
-          </button>
-          <button type="button" onClick={() => setMode("edit")}>
-            Edit
-          </button>
-          <button type="button" onClick={handleDelete}>
-            Delete
-          </button>
+          </p>
+          <p className="emoji" onClick={() => setMode("edit")}>
+          📝
+          </p>
+          <p className="emoji" onClick={handleDelete}>
+          🗑️
+          </p>
         </>
       )}
       {mode === "edit" && (
@@ -82,18 +82,17 @@ function OneProjectListing({
             value={thisProjectName}
             onChange={(e) => setThisProjectName(e.target.value)}
           />
-          <button type="button" onClick={handleSaveEdit}>
-            Save
-          </button>
-          <button
-            type="button"
+          <p className="emoji" onClick={handleSaveEdit}>
+          💾
+          </p>
+          <p className="emoji"
             onClick={() => {
               setMode("display");
               setThisProjectName(project.name);
             }}
           >
-            Cancel
-          </button>
+            🚫
+          </p>
         </>
       )}
     </div>

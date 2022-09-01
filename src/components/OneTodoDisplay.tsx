@@ -99,14 +99,8 @@ function OneTodoDisplay({
             <h2 className="todo-title incomplete overdue">{todo.title}</h2>
           )}
           <p className="todo-description">{todo.description}</p>
-          <p className="todo-duedate">{formatDate(todo.duedate)}</p>
-          <button type="button" onClick={() => setMode("edit")}>
-            Edit
-          </button>
-          <button type="button" onClick={handleDelete}>
-            Delete
-          </button>
-          {todo.complete ? (
+          <p className="todo-duedate">Due: {formatDate(todo.duedate)}</p>
+          <p>Completed:{todo.complete ? (
             <input
               type="checkbox"
               defaultChecked
@@ -114,12 +108,18 @@ function OneTodoDisplay({
             />
           ) : (
             <input type="checkbox" onClick={handleMakeComplete} />
-          )}
+          )}</p>
+          <p className="edit-and-delete">
+            <span onClick={() => setMode("edit")}>📝</span>
+            <span onClick={handleDelete}>🗑️</span>
+          </p>
+          
+          
         </>
       )}
       {mode === "edit" && (
         <>
-          <form>
+          <form className="editing-todo">
             <label htmlFor="title">Title</label>
             <input
               type="text"
@@ -147,12 +147,10 @@ function OneTodoDisplay({
                 setEditedTodo({ ...editedTodo, duedate: e.target.value });
               }}
             />
-            <button type="button" onClick={handleSaveEdit}>
-              Save
-            </button>
-            <button type="button" onClick={handleCancel}>
-              Cancel
-            </button>
+            <p className="save-and-cancel">
+              <span onClick={handleSaveEdit}>💾</span>
+              <span onClick={handleCancel}>🚫</span>
+            </p>
           </form>
         </>
       )}

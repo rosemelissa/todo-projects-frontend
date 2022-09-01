@@ -33,9 +33,9 @@ function CreateNewProject({
   return (
     <div id="create-new-project">
       {mode === "button" && (
-        <button type="button" onClick={() => setMode("input")}>
+        <p onClick={() => setMode("input")}>
           Create new project
-        </button>
+        </p>
       )}
       {mode === "input" && (
         <>

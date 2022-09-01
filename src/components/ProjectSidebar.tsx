@@ -38,7 +38,11 @@ function ProjectsSidebar({
 
   return (
     <div className="projects-sidebar">
-      <p>Projects</p>
+      <h1>Projects</h1>
+      <CreateNewProject
+        refreshProjectsList={refreshProjectsList}
+        setRefreshProjectsList={setRefreshProjectsList}
+      />
       {projects ? (
         projects.map((project) => (
           <OneProjectListing
@@ -55,10 +59,6 @@ function ProjectsSidebar({
       ) : (
         <p>Loading...</p>
       )}
-      <CreateNewProject
-        refreshProjectsList={refreshProjectsList}
-        setRefreshProjectsList={setRefreshProjectsList}
-      />
     </div>
   );
 }

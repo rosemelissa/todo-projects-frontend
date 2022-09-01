@@ -8,7 +8,7 @@ interface FilterProps {
 function Filter({ filterMethod, setFilterMethod }: FilterProps): JSX.Element {
   return (
     <div id="filter">
-      <label htmlFor="filter-method">Filter by:</label>
+      <label htmlFor="filter-method">Filter by: </label>
       <select
         id="filter-method"
         name="filter-method"
@@ -23,7 +23,7 @@ function Filter({ filterMethod, setFilterMethod }: FilterProps): JSX.Element {
         <option value="id">Created date</option>
       </select>
       <label>
-        Show overdue todos?
+        <span> </span>Show overdue todos?
         {filterMethod.showOverdue ? (
           <input
             type="checkbox"

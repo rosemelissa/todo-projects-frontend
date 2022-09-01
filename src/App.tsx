@@ -12,9 +12,9 @@ function App(): JSX.Element {
         selectedProject={selectedProject}
         setSelectedProject={setSelectedProject}
       />
-      {selectedProject && (
+      
         <OneProjectDisplay selectedProject={selectedProject} />
-      )}
+      
     </div>
   );
 }

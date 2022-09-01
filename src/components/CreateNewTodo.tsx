@@ -54,7 +54,7 @@ function CreateNewTodo({
       )}
       {mode === "input" && (
         <form>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Title </label>
           <input
             type="text"
             id="title"
@@ -63,7 +63,7 @@ function CreateNewTodo({
               setNewTodo({ ...newTodo, title: e.target.value });
             }}
           />
-          <label htmlFor="descrption">Description</label>
+          <label htmlFor="descrption"> Description </label>
           <input
             type="text"
             id="description"
@@ -72,7 +72,7 @@ function CreateNewTodo({
               setNewTodo({ ...newTodo, description: e.target.value });
             }}
           />
-          <label htmlFor="due-date">Due date</label>
+          <label htmlFor="due-date"> Due date </label>
           <input
             type="date"
             id="due-date"
