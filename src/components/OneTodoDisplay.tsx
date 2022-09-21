@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import ITodo from "../Interfaces/ITodo";
 import ITodoInput from "../Interfaces/ITodoInput";
+import { baseUrl } from "../utils/constants";
 import formatDate from "../utils/formatDate";
 
 interface OneTodoDisplayProps {
@@ -9,11 +10,6 @@ interface OneTodoDisplayProps {
   refreshTodosList: boolean;
   setRefreshTodosList: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://rosemelissa-todo-projects.herokuapp.com"
-    : "http://localhost:4000";
 
 function OneTodoDisplay({
   todo,
@@ -84,7 +80,6 @@ function OneTodoDisplay({
     setMode("display");
   };
 
-  //GET todo from database
   return (
     <div className="one-todo-display">
       {mode === "display" && (

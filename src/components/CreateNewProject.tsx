@@ -1,15 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { baseUrl } from "../utils/constants";
 
 interface CreateNewProjectProps {
   refreshProjectsList: boolean;
   setRefreshProjectsList: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://rosemelissa-todo-projects.herokuapp.com"
-    : "http://localhost:4000";
 
 function CreateNewProject({
   refreshProjectsList,

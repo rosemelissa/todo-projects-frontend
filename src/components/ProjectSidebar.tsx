@@ -4,17 +4,13 @@ import OneProjectListing from "./OneProjectListing";
 
 import axios from "axios";
 import CreateNewProject from "./CreateNewProject";
+import { baseUrl } from "../utils/constants";
 
 interface ProjectSidebarProps {
   selectedProject: IProject | null;
   setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
   setServerAwake: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://rosemelissa-todo-projects.herokuapp.com"
-    : "http://localhost:4000";
 
 function ProjectsSidebar({
   selectedProject,

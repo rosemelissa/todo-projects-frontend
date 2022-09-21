@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import IProject from "../Interfaces/IProject";
+import { baseUrl } from "../utils/constants";
 
 interface OneProjectListingProps {
   project: IProject;
@@ -11,11 +12,6 @@ interface OneProjectListingProps {
   refreshProjectsList: boolean;
   setRefreshProjectsList: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://rosemelissa-todo-projects.herokuapp.com"
-    : "http://localhost:4000";
 
 function OneProjectListing({
   project,
