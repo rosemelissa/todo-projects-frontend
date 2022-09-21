@@ -23,7 +23,7 @@ function CreateNewTodo({
   const [newTodo, setNewTodo] = useState<ITodoInput>({
     title: "",
     description: "",
-    duedate: "",
+    duedate: new Date().toISOString(),
   });
 
   const handleNewTodo = async () => {
@@ -33,7 +33,7 @@ function CreateNewTodo({
         newTodo
       );
       setMode("button");
-      setNewTodo({ title: "", description: "", duedate: "" });
+      setNewTodo({ title: "", description: "", duedate: new Date().toISOString() });
       setRefreshTodosList(!refreshTodosList);
     }
   };
