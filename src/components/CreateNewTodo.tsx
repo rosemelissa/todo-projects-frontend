@@ -29,7 +29,11 @@ function CreateNewTodo({
         newTodo
       );
       setMode("button");
-      setNewTodo({ title: "", description: "", duedate: new Date().toISOString() });
+      setNewTodo({
+        title: "",
+        description: "",
+        duedate: new Date().toISOString(),
+      });
       setRefreshTodosList(!refreshTodosList);
     }
   };
