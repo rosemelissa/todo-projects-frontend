@@ -2,17 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import IProject from "../Interfaces/IProject";
 import ITodoInput from "../Interfaces/ITodoInput";
+import { baseUrl } from "../utils/constants";
 
 interface CreateNewTodoProps {
   selectedProject: IProject | null;
   refreshTodosList: boolean;
   setRefreshTodosList: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://rosemelissa-todo-projects.herokuapp.com"
-    : "http://localhost:4000";
 
 function CreateNewTodo({
   selectedProject,
@@ -23,7 +19,7 @@ function CreateNewTodo({
   const [newTodo, setNewTodo] = useState<ITodoInput>({
     title: "",
     description: "",
-    duedate: "",
+    duedate: new Date().toISOString(),
   });
 
   const handleNewTodo = async () => {
@@ -33,7 +29,11 @@ function CreateNewTodo({
         newTodo
       );
       setMode("button");
-      setNewTodo({ title: "", description: "", duedate: "" });
+      setNewTodo({
+        title: "",
+        description: "",
+        duedate: new Date().toISOString(),
+      });
       setRefreshTodosList(!refreshTodosList);
     }
   };

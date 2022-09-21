@@ -4,20 +4,18 @@ import OneProjectListing from "./OneProjectListing";
 
 import axios from "axios";
 import CreateNewProject from "./CreateNewProject";
+import { baseUrl } from "../utils/constants";
 
 interface ProjectSidebarProps {
   selectedProject: IProject | null;
   setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
+  setServerAwake: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://rosemelissa-todo-projects.herokuapp.com"
-    : "http://localhost:4000";
 
 function ProjectsSidebar({
   selectedProject,
   setSelectedProject,
+  setServerAwake,
 }: ProjectSidebarProps): JSX.Element {
   const [projects, setProjects] = useState<IProject[]>([]);
   const [refreshProjectsList, setRefreshProjectsList] = useState<boolean>(true);
@@ -29,11 +27,13 @@ function ProjectsSidebar({
           await axios.get(`${baseUrl}/projects`)
         ).data;
         setProjects(projectArray);
+        setServerAwake(true);
       } catch (error) {
         console.error(error);
       }
     };
     fetchProjects();
+    // eslint-disable-next-line
   }, [refreshProjectsList]);
 
   return (

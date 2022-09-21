@@ -7,21 +7,15 @@ import CreateNewTodo from "./CreateNewTodo";
 import Filter from "./Filter";
 import OneTodoDisplay from "./OneTodoDisplay";
 import filterTodos from "../utils/filterTodos";
+import { baseUrl } from "../utils/constants";
 
 interface OneProjectDisplayProps {
   selectedProject: IProject | null;
 }
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://rosemelissa-todo-projects.herokuapp.com"
-    : "http://localhost:4000";
-
 function OneProjectDisplay({
   selectedProject,
 }: OneProjectDisplayProps): JSX.Element {
-  //GET that project name by id
-  //GET that projects todo list ids by projectid
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [refreshTodosList, setRefreshTodosList] = useState<boolean>(true);
   const [filterMethod, setFilterMethod] = useState<IFilter>({
