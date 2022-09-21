@@ -8,6 +8,7 @@ import CreateNewProject from "./CreateNewProject";
 interface ProjectSidebarProps {
   selectedProject: IProject | null;
   setSelectedProject: React.Dispatch<React.SetStateAction<IProject | null>>;
+  setServerAwake: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const baseUrl =
@@ -18,6 +19,7 @@ const baseUrl =
 function ProjectsSidebar({
   selectedProject,
   setSelectedProject,
+  setServerAwake,
 }: ProjectSidebarProps): JSX.Element {
   const [projects, setProjects] = useState<IProject[]>([]);
   const [refreshProjectsList, setRefreshProjectsList] = useState<boolean>(true);
@@ -29,11 +31,13 @@ function ProjectsSidebar({
           await axios.get(`${baseUrl}/projects`)
         ).data;
         setProjects(projectArray);
+        setServerAwake(true);
       } catch (error) {
         console.error(error);
       }
     };
     fetchProjects();
+    // eslint-disable-next-line
   }, [refreshProjectsList]);
 
   return (
